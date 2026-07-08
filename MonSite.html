@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LE CANARD LOCAL — Scandale Riem : la ville ne s'en remet pas</title>
+<style>
+  :root{
+    --paper: #f2ede2;
+    --ink: #1a1a1a;
+    --blood: #c8102e;
+    --highlight: #f4c542;
+    --tape: rgba(244,197,66,0.85);
+    --gray: #6b6258;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: #3a332b;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    display:flex;
+    justify-content:center;
+    padding: 32px 12px;
+  }
+
+  .sheet{
+    max-width: 900px;
+    width:100%;
+    background: var(--paper);
+    background-image:
+      radial-gradient(rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    position: relative;
+    padding: 0 0 40px 0;
+    overflow:hidden;
+  }
+
+  .ticker{
+    background: var(--ink);
+    color: var(--highlight);
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 0;
+    white-space: nowrap;
+    overflow:hidden;
+  }
+  .ticker span{
+    display:inline-block;
+    padding-left: 100%;
+    animation: scroll 22s linear infinite;
+  }
+  @keyframes scroll{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-100%); }
+  }
+
+  .masthead{
+    text-align:center;
+    padding: 18px 20px 10px;
+    border-bottom: 4px double var(--ink);
+  }
+  .masthead .kicker{
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .masthead h1.brand{
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 54px;
+    margin: 4px 0 6px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .masthead .sub{
+    display:flex;
+    justify-content:space-between;
+    font-size: 11px;
+    color: var(--gray);
+    font-family: 'Courier New', monospace;
+    border-top: 1px solid var(--ink);
+    padding-top: 6px;
+  }
+
+  .headline-block{
+    padding: 26px 30px 0;
+  }
+  .eyebrow{
+    display:inline-block;
+    background: var(--blood);
+    color: var(--paper);
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    transform: rotate(-1.5deg);
+    margin-bottom: 10px;
+  }
+  h2.headline{
+    font-size: 46px;
+    line-height: 1.05;
+    margin: 0 0 8px;
+    font-weight: 900;
+  }
+  h2.headline em{
+    font-style: normal;
+    background: linear-gradient(180deg, transparent 60%, var(--highlight) 60%);
+  }
+  .deck{
+    font-size: 19px;
+    font-style: italic;
+    color: #35302a;
+    border-left: 4px solid var(--blood);
+    padding-left: 14px;
+    margin: 14px 0 20px;
+  }
+  .byline{
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--gray);
+    display:flex;
+    justify-content:space-between;
+    border-bottom: 1px solid #c9bfa9;
+    padding-bottom: 10px;
+  }
+
+  .photo{
+    margin: 20px 30px;
+    position: relative;
+    background: #cfc4ac;
+    border: 6px solid var(--paper);
+    outline: 1px solid var(--ink);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    transform: rotate(-0.6deg);
+  }
+  .photo svg{ display:block; width:100%; height:auto; }
+  .photo .caption{
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    padding: 6px 4px 2px;
+    border-top: 1px dashed #bbb096;
+  }
+  .tape{
+    position:absolute;
+    width: 70px; height: 22px;
+    background: var(--tape);
+    top: -12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .tape.l{ left: 20px; transform: rotate(-8deg); }
+  .tape.r{ right: 20px; transform: rotate(6deg); }
+
+  .body-text{
+    padding: 0 30px;
+    columns: 2;
+    column-gap: 28px;
+    font-size: 16.5px;
+    line-height: 1.6;
+  }
+  .body-text p{
+    margin: 0 0 14px;
+  }
+  .body-text p.lede::first-letter{
+    font-size: 52px;
+    font-weight: 900;
+    float:left;
+    line-height: 0.8;
+    padding: 4px 6px 0 0;
+    color: var(--blood);
+  }
+  .body-text blockquote{
+    font-style: italic;
+    font-size: 18px;
+    margin: 10px 0;
+    padding: 8px 0 8px 14px;
+    border-left: 3px solid var(--highlight);
+    break-inside: avoid;
+  }
+  .body-text blockquote cite{
+    display:block;
+    font-style: normal;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  .sidebar{
+    margin: 26px 30px 0;
+    border: 2px solid var(--ink);
+    padding: 14px 16px;
+    background: repeating-linear-gradient(135deg, #e6dcc6, #e6dcc6 10px, #ddd2b8 10px, #ddd2b8 20px);
+  }
+  .sidebar h3{
+    margin: 0 0 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--highlight);
+    display:inline-block;
+    padding: 3px 8px;
+  }
+  .sidebar ul{
+    margin: 8px 0 0;
+    padding-left: 18px;
+    font-size: 14px;
+  }
+  .sidebar li{ margin-bottom: 6px; }
+
+  .stamp{
+    position:absolute;
+    top: 130px;
+    right: 40px;
+    width: 120px;
+    height: 120px;
+    border: 5px solid var(--blood);
+    border-radius: 50%;
+    color: var(--blood);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transform: rotate(-18deg);
+    opacity: 0.85;
+    pointer-events:none;
+  }
+
+  .footer-note{
+    margin: 30px 30px 0;
+    padding-top: 14px;
+    border-top: 3px double var(--ink);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    text-align:center;
+  }
+
+  @media (max-width: 640px){
+    .body-text{ columns: 1; }
+    h2.headline{ font-size: 32px; }
+    .masthead h1.brand{ font-size: 36px; }
+    .stamp{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="ticker"><span>⚠ AGEN — DERNIÈRE MINUTE — TOUT LE QUARTIER DU GRAVIER NE PARLE QUE DE ÇA — LOT-ET-GARONNE EN ÉMOI — ⚠</span></div>
+
+  <div class="masthead">
+    <div class="kicker">Édition Lot-et-Garonne (47) · Agen &amp; agglomération</div>
+    <h1 class="brand">La Dépêche du Midi</h1>
+    <div class="sub">
+      <span>Agen · Aujourd'hui</span>
+      <span>Rubrique : Faits divers &amp; Vie locale</span>
+      <span>Prix indicatif : 1,50 €</span>
+    </div>
+  </div>
+
+  <div class="headline-block">
+    <span class="eyebrow">EXCLUSIF AGEN</span>
+    <h2 class="headline">Noah Riem au cœur d'un <em>scandale</em> qui secoue le centre-ville</h2>
+    <p class="deck">Un après-midi comme un autre au marché couvert d'Agen a suffi à faire basculer la réputation de Noah Riem. Récit d'une journée que le Lot-et-Garonne ne va pas oublier de sitôt.</p>
+    <div class="byline">
+      <span>Par notre correspondant local, Plume Anonyme</span>
+      <span>Édition Agen · Rubrique brûlante</span>
+    </div>
+  </div>
+
+  <div class="photo">
+    <div class="tape l"></div><div class="tape r"></div>
+    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="400" fill="#8d8368"/>
+      <rect width="800" height="400" fill="#00000022"/>
+      <circle cx="250" cy="180" r="70" fill="#d8c9a3"/>
+      <rect x="190" y="250" width="120" height="140" fill="#3a332b"/>
+      <circle cx="560" cy="200" r="55" fill="#c9b98f"/>
+      <rect x="510" y="255" width="100" height="130" fill="#b3121b"/>
+      <text x="400" y="60" text-anchor="middle" font-family="Courier New" font-size="20" fill="#efe6d8">MARCHÉ COUVERT D'AGEN</text>
+      <text x="400" y="380" text-anchor="middle" font-family="Courier New" font-size="14" fill="#efe6d8" opacity="0.8">(Noah Riem, à gauche, tente de garder son calme face aux étals)</text>
+    </svg>
+    <div class="caption">Photo d'illustration prise près du Gravier — les ressemblances avec des faits réels sont, disons, assumées.</div>
+  </div>
+
+  <div class="stamp">100%<br>DRAMA<br>CONFIRMÉ</div>
+
+  <div class="body-text">
+    <p class="lede">Tout a commencé, comme souvent, par une histoire de pruneaux. Selon plusieurs témoins présents ce jour-là au marché couvert d'Agen, Noah Riem se serait approché de l'étal le plus réputé de la ville avec une assurance déconcertante, avant de repartir avec non pas un sachet, mais la totalité du stock de pruneaux d'Agen. « J'ai vu l'étal se vider en direct, c'était presque cinématographique », confie une commerçante encore secouée, derrière son comptoir du Gravier.</p>
+
+    <p>L'affaire aurait pu s'arrêter là. Mais c'était sans compter sur le groupe de discussion du quartier du Gravier, où la nouvelle s'est répandue plus vite que la Garonne en crue. En quelques heures, Noah Riem est passé du statut d'Agenais discret à celui de personnage principal d'un feuilleton dont personne, de Montanou à l'Ermitage, n'avait demandé la saison 2.</p>
+
+    <blockquote>
+      « Je ne fais que passer une journée normale à Agen et soudain je suis dans tous les groupes WhatsApp du quartier. »
+      <cite>— Noah Riem, tentant de garder son sang-froid face aux caméras imaginaires</cite>
+    </blockquote>
+
+    <p>Des sources proches du dossier évoquent également une apparition remarquée sur les bords de Garonne, où Noah Riem aurait été aperçu en pleine négociation avec un cygne particulièrement territorial, non loin du pont Canal. « Le cygne a eu le dernier mot », précise un promeneur, encore impressionné par le sang-froid affiché des deux côtés.</p>
+
+    <p>Interrogé sur ces événements, l'entourage de Noah Riem se refuse à tout commentaire officiel, préférant laisser planer le mystère — une stratégie que certains, du côté du stade Armandie, qualifient déjà de « brillante gestion de crise », et d'autres de « bon, on va peut-être arrêter d'en faire tout un plat de pruneaux ».</p>
+
+    <p>Ce qui est certain, c'est que l'histoire ne fait que commencer. Entre la théorie du pruneau, celle du cygne diplomate, et les multiples versions qui circulent déjà entre le marché et l'agglomération, une chose est sûre : à partir d'aujourd'hui, plus rien ne sera comme avant pour Noah Riem, ni pour Agen.</p>
+  </div>
+
+  <div class="sidebar">
+    <h3>Ce qu'il faut retenir</h3>
+    <ul>
+      <li>Un étal de pruneaux d'Agen entièrement dévalisé au marché couvert.</li>
+      <li>Une confrontation tendue avec un cygne sur les bords de Garonne, issue encore débattue.</li>
+      <li>Un silence radio qui alimente toutes les théories, du Gravier à Armandie.</li>
+      <li>Toute l'agglomération agenaise suspendue aux prochains rebondissements.</li>
+    </ul>
+  </div>
+
+  <div class="footer-note">Ceci est une œuvre de fiction humoristique, publiée pour le plaisir et sans aucune prétention journalistique. Aucun croissant ni canard n'a été blessé durant la rédaction de cet article.</div>
+
+</div>
+</body>
+</html>
